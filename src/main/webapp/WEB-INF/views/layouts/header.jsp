@@ -26,10 +26,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/login">로그인</a>
+                <a class="nav-link" href="/auth/login">로그인</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/join">회원가입</a>
+                <a class="nav-link" href="/auth/join">회원가입</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

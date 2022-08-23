@@ -15,6 +15,7 @@
                         <!-- FORM -->
                         <form class="px-md-2">
                             <div class="column">
+
                                 <div class="form-outline mb-4">
                                     <input type="text" id="username" class="form-control" placeholder="Username" />
                                 </div>

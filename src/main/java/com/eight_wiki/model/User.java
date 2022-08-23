@@ -28,6 +28,10 @@ public class User {
   @Column(name="username", length = 100, unique = true)
   private String username;
 
+  @NotBlank(message = "Name 입력은 필수입니다.")
+  @Column(name="name", length = 20, unique = true)
+  private String name;
+
   @NotBlank(message="Email 입력은 필수입니다.")
   @Column(name="email", length = 100, unique = true)
   private String email;
