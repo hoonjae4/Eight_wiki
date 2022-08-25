@@ -28,7 +28,6 @@ $("#nickName").blur(function(){
     }
 });
 
-
 $("#username").blur(function() {
     var username = $("#username").val();
     var usernameRegex = /^[a-zA-Z0-9]{5,15}$/;
@@ -83,6 +82,7 @@ $("#password").blur(function(){
     }
 
 });
+
 $("#email").blur(function(){
     var email =  $("#email").val();
     if(email == "" || email.length < 5){
@@ -127,70 +127,73 @@ $("#password2").blur(function(){
         $("#password2Check").val("false");
     }
 });
+
 $("#birthYear").blur(function(){
-    var birthYear =  $("#birthYear").val() * 1;
-    if(isNaN(birthYear) || birthYear > 2022 || birthYear < 1900){
-        $("#birthYearCheck").val("false");
+    var birthYear =  $("#birthYear").val();
+    var birthMonth = $("#birthMonth").val();
+    var birthDay = $("#birthDay").val();
+    var birth = birthYear + "-" + birthMonth + "-" + birthDay;
+    var birthReg = /^((19[0-9]\d{1})|(20((0[0-9])|(1[0-9])|(2[0-2]))))\-(([1-9])|(1[0-2]))\-(([1-9])|([1-2][0-9])|30|31)$/;
+    if(birthMonth == "2" && birthDay * 1 > 28){
+        $("#birthCheck").val("false");
+        $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
+        $("#successBirth").css("color","red");
+    }
+    else if(!birthReg.test(birth)){
+        $("#birthCheck").val("false");
         $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
         $("#successBirth").css("color","red");
     } else{
-        $("#birthYearCheck").val("true");
-    }
-    if($("#birthDayCheck").val() == "true" && $("#birthYearCheck").val() == "true" && $("#birthMonthCheck").val() == "true"){
         $("#successBirth").text("생년월일이 올바르게 입력되었습니다 :)")
         $("#successBirth").css("color","green");
-    }
-    else{
-        $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
-        $("#successBirth").css("color","red");
+        $("#birthCheck").val("true");
     }
 });
+
 $("#birthMonth").blur(function(){
-    var birthMonth =  $("#birthMonth").val() * 1;
-    if(isNaN(birthMonth) || birthMonth > 12 || birthMonth < 1){
-        $("#birthMonthCheck").val("false");
+    var birthYear =  $("#birthYear").val();
+    var birthMonth = $("#birthMonth").val();
+    var birthDay = $("#birthDay").val();
+    var birth = birthYear + "-" + birthMonth + "-" + birthDay;
+    var birthReg = /^((19[0-9]\d{1})|(20((0[0-9])|(1[0-9])|(2[0-2]))))\-(([1-9])|(1[0-2]))\-(([1-9])|([1-2][0-9])|30|31)$/;
+    if(birthMonth == "2" && birthDay * 1 > 28){
+        $("#birthCheck").val("false");
+        $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
+        $("#successBirth").css("color","red");
+    }
+    else if(!birthReg.test(birth)){
+        $("#birthCheck").val("false");
         $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
         $("#successBirth").css("color","red");
     } else{
-        $("#birthMonthCheck").val("true");
-    }
-    if($("#birthDayCheck").val() == "true" && $("#birthYearCheck").val() == "true" && $("#birthMonthCheck").val() == "true"){
         $("#successBirth").text("생년월일이 올바르게 입력되었습니다 :)")
         $("#successBirth").css("color","green");
+        $("#birthCheck").val("true");
     }
-    else{
+});
+
+$("#birthDay").blur(function(){
+    var birthYear =  $("#birthYear").val();
+    var birthMonth = $("#birthMonth").val();
+    var birthDay = $("#birthDay").val();
+    var birth = birthYear + "-" + birthMonth + "-" + birthDay;
+    var birthReg = /^((19[0-9]\d{1})|(20((0[0-9])|(1[0-9])|(2[0-2]))))\-(([1-9])|(1[0-2]))\-(([1-9])|([1-2][0-9])|30|31)$/;
+    if((birthMonth*1 == 2 && birthDay * 1 > 29 && birthYear%4==0) || (birthMonth*1 == 2 && birthDay * 1 > 28 && birthYear%4!=0)){
+        $("#birthCheck").val("false");
         $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
         $("#successBirth").css("color","red");
     }
-});
-$("#birthDay").blur(function(){
-    var birthDay =  $("#birthDay").val() * 1;
-    var birthMonth = $("#birthMonth").val() * 1;
-    if(isNaN(birthDay)|| isNaN(birthMonth)){
-        $("#birthDayCheck").val("false");
-        $("#successBirth").text("생년월일이 올바르지 않습니다 :(");
-        $("#successBirth").css("color","red");
-    }
-    else if(birthMonth != 2 && (birthDay > 31 || birthDay < 1)){
-        $("#birthDayCheck").val("false");
-        $("#successBirth").text("생년월일이 올바르지 않습니다 :(");
-        $("#successBirth").css("color","red");
-    } else if(birthMonth == 2 && (birthDay > 29 || birthDay < 1)){
-        $("#birthDayCheck").val("false");
-        $("#successBirth").text("생년월일이 올바르지 않습니다 :(");
+    else if(!birthReg.test(birth)){
+        $("#birthCheck").val("false");
+        $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
         $("#successBirth").css("color","red");
     } else{
-        $("#birthDayCheck").val("true");
-    }
-    if($("#birthDayCheck").val() == "true" && $("#birthYearCheck").val() == "true" && $("#birthMonthCheck").val() == "true"){
-        $("#successBirth").text("생년월일이 올바르게 입력되었습니다 :)");
+        $("#successBirth").text("생년월일이 올바르게 입력되었습니다 :)")
         $("#successBirth").css("color","green");
-    }
-    else{
-        $("#successBirth").text("생년월일이 올바르지 않습니다 :(")
-        $("#successBirth").css("color","red");
+        $("#birthCheck").val("true");
     }
 });
+
 $("#gender").blur(function(){
     var gender = $("#gender").val();
     if(gender == "FEMAIL" || gender =="MAIL"){
@@ -203,4 +206,57 @@ $("#gender").blur(function(){
      $("#successGender").css("color","red");
      $("#genderCheck").val("false");
     }
-})
+});
+
+$("#join").on("click",()=>{
+    if($("#nickNameCheck").val() == "true" && $("#usernameCheck").val()=="true" && $("#passwordCheck").val() == "true" &&
+        $("#password2Check").val() == "true" && $("#birthCheck").val() =="true" && $("#genderCheck").val() == "true" &&
+        $("#emailCheck").val() == "true"){
+
+        let data = {
+            nickName: $("#nickName").val(),
+            username: $("#username").val(),
+            password: $("#password").val(),
+            email: $("#email").val(),
+            birth: $("#birthYear").val() + "-" + $("#birthMonth").val() + "-" + $("#birthDay").val(),
+            gender: $("#gender").val(),
+            introduce: $("#introduce").val(),
+        }
+        $.ajax({
+            type:"POST",
+            url:"/auth/joinValidation",
+            data : JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp){
+           if(resp){
+               //resp == true -> 유효성검사 완료, 회원가입후 메인페이지
+               $.ajax({
+                   type:"POST",
+                   url:"/auth/joinProc",
+                   data:JSON.stringify(data),
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json"
+               }).done(function(resp){
+                   alert("회원가입 ㅊㅊ");
+                   location.href="/";
+               }).fail(function(error){
+                   console.log(JSON.stringify(error));
+                   console.log("회원가입 오류");
+               });
+           } else{
+               console.log("유효성검사 실패");
+               $("#validation").text("유효성 검사에서 오류가 발생하였습니다.");
+               $("#validation").css("color","blue");
+               //resp == false -> 유효성검사 통과X
+           }
+        }).fail(function(error){
+            console.log("유효성 검사 불러오기 실패");
+            console.log(JSON.stringify(error));
+        });
+    }
+    else{
+        $("#successJoin").text("Form 입력이 잘못되었습니다. 확인하세요 :(");
+        $("#successJoin").css("color","red");
+    }
+});

@@ -51,22 +51,15 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Oauth oauth; //kakao,google
 
-  @NotBlank(message="생년월일 입력은 필수입니다.")
-  @Column(name="birthYear")
-  private int birthYear;
-  @NotBlank(message="생년월일 입력은 필수입니다.")
-  @Column(name="birthMonth")
-  private int birthMonth;
-  @NotBlank(message="생년월일 입력은 필수입니다.")
-  @Column(name="birthDay", nullable = false)
-  private int birthDay;
+  @NotBlank
+  @Pattern(regexp = "^((19[0-9]\\d{1})|(20((0[0-9])|(1[0-9])|(2[0-2]))))\\-(([1-9])|(1[0-2]))\\-(([1-9])|([1-2][0-9])|30|31)$" )
+  private String birth;
 
   @Column(name = "createTime",updatable = false)
   private LocalDateTime createTime;
   private LocalDateTime updateTime;
 
   @Enumerated(EnumType.STRING)
-  @NotBlank(message="성별 입력은 필수입니다.")
   private Gender gender;
 
   @PrePersist

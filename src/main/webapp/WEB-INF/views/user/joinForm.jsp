@@ -51,7 +51,6 @@
                                             <option value="${i}">${i}</option>
                                         </c:forEach>
                                     </select>
-                                    <input type="hidden" id="birthYearCheck" value="false"/>
                                 </div>
                                 <div class="form-outline col-4">
                                     <select class="form-control" id="birthMonth">
@@ -60,12 +59,11 @@
                                             <option value="${i}">${i}</option>
                                         </c:forEach>
                                     </select>
-                                    <input type="hidden" id="birthMonthCheck" value="false"/>
                                 </div>
                                 <div class="form-outline col-4">
                                     <input type="text" class="form-control" id="birthDay" placeholder="일">
-                                    <input type="hidden" id="birthDayCheck" value="false"/>
                                 </div>
+                                <input type="hidden" value="false" id="birthCheck">
                                 <span class="col" id="successBirth">생년월일을 입력해주세요.</span>
                             </div>
                             <br/>
@@ -81,11 +79,19 @@
                                     <input type="hidden" id="genderCheck" value="false"/>
                                 </div>
                             </div>
-                            <div class="form-outline">
+                            <div class="form-outline mb-3">
                                 <label for="introduce">자기소개</label>
                                 <textarea class="form-control" rows="4" id="introduce"></textarea>
                             </div>
-                            <button type="button" id="join" class="btn btn-success">Register</button>
+                            <div class="justify-content-center row">
+                                <button type="button" id="join" class="btn btn-success mb-1">Register</button>
+                            </div>
+                            <div class="justify-content-center row">
+                                <span id="successJoin"></span>
+                            </div>
+                            <div class="justify-content-center row">
+                                <span id="validation"></span>
+                            </div>
                         </form>
 
                     </div>
