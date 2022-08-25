@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
@@ -26,11 +27,13 @@ public class User {
 
   @NotBlank(message = "ID 입력은 필수입니다.")
   @Column(name="username", length = 100, unique = true)
+  @Pattern(regexp = "^[a-zA-Z0-9]{5,15}$", message = "ID는 영어와 숫자로 이루어진 5~15자로 설정해주세요.")
   private String username;
 
   @NotBlank(message = "Name 입력은 필수입니다.")
-  @Column(name="name", length = 20, unique = true)
-  private String name;
+  @Column(name="nickName", length = 20, unique = true)
+  @Pattern(regexp = "^[a-zA-Z0-9가-힣]{2,12}$",message = "닉네임은 2글자 이상 12글자 미만으로 설정해주세요. 특수문자 불가능. :)")
+  private String nickName;
 
   @NotBlank(message="Email 입력은 필수입니다.")
   @Column(name="email", length = 100, unique = true)
@@ -38,6 +41,8 @@ public class User {
 
   @NotBlank(message = "Password 입력은 필수입니다.")
   @Column(name = "password", length = 255)
+  @Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}",
+          message = "비밀번호는 영문자와, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자로 설정해주세요.")
   private String password;
 
   @Column(name = "introduce", nullable = true, length = 1000)
@@ -46,10 +51,10 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Oauth oauth; //kakao,google
 
-  @NotBlank
+  @NotBlank(message="생년월일 입력은 필수입니다.")
   @Column(name="birthYear")
   private int birthYear;
-  @NotBlank
+  @NotBlank(message="생년월일 입력은 필수입니다.")
   @Column(name="birthMonth")
   private int birthMonth;
   @NotBlank(message="생년월일 입력은 필수입니다.")
@@ -61,6 +66,7 @@ public class User {
   private LocalDateTime updateTime;
 
   @Enumerated(EnumType.STRING)
+  @NotBlank(message="성별 입력은 필수입니다.")
   private Gender gender;
 
   @PrePersist

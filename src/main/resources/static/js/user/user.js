@@ -1,34 +1,76 @@
-$("#name").blur(function(){
-    var name =  $("#name").val();
-    if(name == "" || name.length < 2){
-        $("#successName").text("이름은 2자 이상 10자 미만으로 설정하셔야 합니다! :)");
-        $("#successName").css("color", "red");
-        $("#nameCheck").val("false");
+$("#nickName").blur(function(){
+    var nickName =  $("#nickName").val();
+    var nickNameRegex = /^[a-zA-Z0-9가-힣]{2,12}$/
+    if(!nickNameRegex.test(nickName)){
+        $("#successNickName").text("닉네임은 2글자 이상 12글자 미만으로 설정해주세요. 특수문자 불가능. :)");
+        $("#successNickName").css("color", "red");
+        $("#nickNameCheck").val("false");
     } else{
-        //이름 중복 검사 할곳.
-        $("#nameCheck").val("true");
+        $.ajax({
+            url: '/auth/nickNameCheck?checkNickname='+nickName,
+            type:'post',
+            cache: false,
+            success:function(data){
+                if(data){
+                    $("#successNickName").text("사용중인 닉네임입니다 :p");
+                    $("#successNickName").css("color", "red");
+                    $("#nickNameCheck").val("false");
+                } else{
+                    $("#successNickName").text("사용 가능한 닉네임입니다 :p");
+                    $("#successNickName").css("color", "green");
+                    $("#nickNameCheck").val("true");
+                }
+            },
+            fail:function(error){
+                console.log(error);
+            }
+        });
     }
 });
-$("#username").blur(function(){
-    var username =  $("#username").val();
-    if(username == "" || username.length < 5 || username.length > 9){
-        $("#successUsername").text("아이디는 5자 이상 10자 미만으로 설정하셔야 합니다! :)");
+
+
+$("#username").blur(function() {
+    var username = $("#username").val();
+    var usernameRegex = /^[a-zA-Z0-9]{5,15}$/;
+    if (!usernameRegex.test(username)) {
+        $("#successUsername").text("ID는 영어와 숫자로 이루어진 5~15자로 설정해주세요 :(");
         $("#successUsername").css("color", "red");
         $("#usernameCheck").val("false");
-    } else{
-    //아이디 중복,유효성 검사 할거임.
-        $("#usernameCheck").val("true");
+    } else {
+        $.ajax({
+            url: '/auth/usernameCheck?checkUsername=' + username,
+            type: 'post',
+            cache: false,
+            success: function (data) {
+                if (data) {
+                    $("#successUsername").text("사용중인 ID입니다 :p");
+                    $("#successUsername").css("color", "red");
+                    $("#usernameCheck").val("false");
+                } else {
+                    $("#successUsername").text("사용 가능한 ID입니다 :p");
+                    $("#successUsername").css("color", "green");
+                    $("#usernameCheck").val("true");
+                }
+            },
+            fail: function (error) {
+                console.log(error);
+            }
+        });
     }
 });
+
 $("#password").blur(function(){
     var password =  $("#password").val();
-    if(password == "" || password.length < 5){
-        $("#successPassword").text("비밀번호는 5자 이상으로 설정하셔야 합니다! :(");
+    var passwordRegex = /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\W)(?=\S+$).{8,20}/;
+    if(!passwordRegex.test(password)){
+        $("#successPassword").text("비밀번호는 영문자와, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.");
         $("#successPassword").css("color", "red");
         $("#passwordCheck").val("false");
-    } else{
+    }
+    else{
         $("#passwordCheck").val("true");
-        //패스워드 유효성 검사 할것.
+        $("#successPassword").text("사용 가능한 비밀번호입니다 :)");
+        $("#successPassword").css("color", "green");
         if($("#password").val() == $("#password2").val()){
             $("#successPassword2").text("비밀번호가 일치합니다 :)");
             $("#successPassword2").css("color", "green");
@@ -41,6 +83,39 @@ $("#password").blur(function(){
     }
 
 });
+$("#email").blur(function(){
+    var email =  $("#email").val();
+    if(email == "" || email.length < 5){
+        $("#successEmail").text("이메일은 5자 이상으로 설정하셔야 합니다! :)");
+        $("#successEmail").css("color", "red");
+        $("#emailCheck").val("false");
+    } else {
+        $.ajax({
+            url: '/auth/emailCheck?checkEmail=' + email,
+            type: 'post',
+            cache: false,
+            success: function (data) {
+                if (data) {
+                    console.log(data);
+                    console.log("중복있음");
+                    $("#successEmail").text("사용중인 이메일입니다 :p");
+                    $("#successEmail").css("color", "red");
+                    $("#emailCheck").val("false");
+                } else {
+                    console.log(data);
+                    console.log("중복없음");
+                    $("#successEmail").text("사용 가능한 이메일입니다 :p");
+                    $("#successEmail").css("color", "green");
+                    $("#emailCheck").val("true");
+                }
+            },
+            fail: function (error) {
+                console.log(error);
+            }
+        });
+    }
+});
+
 $("#password2").blur(function(){
     if($("#password").val() == $("#password2").val()){
         $("#successPassword2").text("비밀번호가 일치합니다 :)");
@@ -52,18 +127,6 @@ $("#password2").blur(function(){
         $("#password2Check").val("false");
     }
 });
-$("#email").blur(function(){
-    var email =  $("#email").val();
-    if(email == "" || email.length < 5){
-        $("#successEmail").text("이메일은 5자 이상으로 설정하셔야 합니다! :)");
-        $("#successEmail").css("color", "red");
-        $("#emailCheck").val("false");
-    } else{
-        //이메일 중복,유효성 검사 할거임.
-        $("#emailCheck").val("true");
-    }
-});
-
 $("#birthYear").blur(function(){
     var birthYear =  $("#birthYear").val() * 1;
     if(isNaN(birthYear) || birthYear > 2022 || birthYear < 1900){

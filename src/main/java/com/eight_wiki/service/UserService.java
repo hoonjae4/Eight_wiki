@@ -12,4 +12,10 @@ public class UserService {
   public void 회원가입(User user){
     userRepository.save(user);
   }
+
+  public boolean duplicateNicknameCheck(String nickName){
+    return userRepository.existsByNickName(nickName);
+  }
+  public boolean duplicateUsernameCheck(String username) { return userRepository.existsByUsername(username); }
+  public boolean duplicateEmailCheck(String email) { return userRepository.existsByEmail(email); }
 }

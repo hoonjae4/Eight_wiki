@@ -16,27 +16,27 @@
                         <form class="px-md-2" id="joinForm">
                             <div class="column">
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="name" class="form-control" placeholder="Name" />
-                                    <span id="successName">이름을 입력해 주세요.</span>
-                                    <input type="hidden" id="nameCheck" value="false"/>
+                                    <input type="text" id="nickName" class="form-control" placeholder="닉네임" />
+                                    <span id="successNickName">닉네임을 입력해 주세요.</span>
+                                    <input type="hidden" id="nickNameCheck" value="false"/>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="username" class="form-control" placeholder="Username"/>
+                                    <input type="text" id="username" class="form-control" placeholder="아이디"/>
                                     <span id="successUsername">아이디를 입력해 주세요.</span>
                                     <input type="hidden" id="usernameCheck" value="false"/>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="password" class="form-control" placeholder="Password"/>
+                                    <input type="password" id="password" class="form-control" placeholder="비밀번호"/>
                                     <span id="successPassword">비밀번호를 입력해 주세요.</span>
                                     <input type="hidden" id="passwordCheck" value="false"/>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="password2" class="form-control" placeholder="Password Validation"/>
+                                    <input type="password" id="password2" class="form-control" placeholder="비밀번호확인"/>
                                     <span id="successPassword2">비밀번호 확인.</span>
                                     <input type="hidden" id="password2Check" value="false"/>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="email" class="form-control" placeholder="Email"/>
+                                    <input type="text" id="email" class="form-control" placeholder="이메일"/>
                                     <span id="successEmail">이메일을 입력해 주세요.</span>
                                     <input type="hidden" id="emailCheck" value="false"/>
                                 </div>

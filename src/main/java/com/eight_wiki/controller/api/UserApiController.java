@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,5 +23,18 @@ public class UserApiController {
     user.setOauth(Oauth.BASIC);
     userService.회원가입(user);
     return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+  }
+
+  @PostMapping("/auth/nickNameCheck")
+  public boolean nickNameCheck(@RequestParam("checkNickname") String nickName){
+    return userService.duplicateNicknameCheck(nickName);
+  }
+  @PostMapping("/auth/usernameCheck")
+  public boolean usernameCheck(@RequestParam("checkUsername") String username){
+    return userService.duplicateUsernameCheck(username);
+  }
+  @PostMapping("/auth/emailCheck")
+  public boolean emailCheck(@RequestParam("checkEmail") String email){
+    return userService.duplicateEmailCheck(email);
   }
 }
