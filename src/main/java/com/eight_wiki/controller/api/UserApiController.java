@@ -49,7 +49,8 @@ public class UserApiController {
       return false;
     }
     else{
-      return !userService.validation(userSaveResponseDto);
+      String birth = userSaveResponseDto.getBirth();
+      return !userService.validation(birth);
     }
   }
 }

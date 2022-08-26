@@ -41,8 +41,6 @@ public class User {
 
   @NotBlank(message = "Password 입력은 필수입니다.")
   @Column(name = "password", length = 255)
-  @Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}",
-          message = "비밀번호는 영문자와, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자로 설정해주세요.")
   private String password;
 
   @Column(name = "introduce", nullable = true, length = 1000)
@@ -50,6 +48,10 @@ public class User {
 
   @Enumerated(EnumType.STRING)
   private Oauth oauth; //kakao,google
+
+  @Enumerated(EnumType.STRING)
+  @ColumnDefault("'USER'")
+  private Role role;
 
   @NotBlank
   @Pattern(regexp = "^((19[0-9]\\d{1})|(20((0[0-9])|(1[0-9])|(2[0-2]))))\\-(([1-9])|(1[0-2]))\\-(([1-9])|([1-2][0-9])|30|31)$" )

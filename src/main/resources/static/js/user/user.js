@@ -246,8 +246,7 @@ $("#join").on("click",()=>{
                });
            } else{
                console.log("유효성검사 실패");
-               $("#validation").text("유효성 검사에서 오류가 발생하였습니다.");
-               $("#validation").css("color","blue");
+               alert("유효성 검사 실패");
                //resp == false -> 유효성검사 통과X
            }
         }).fail(function(error){
