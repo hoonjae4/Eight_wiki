@@ -1,6 +1,5 @@
 package com.eight_wiki.controller.config.handler;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 @Component
-public class CustomAuthFailerHandler extends SimpleUrlAuthenticationFailureHandler {
+public class CustomAuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
   @Override
   public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
     String errorMessage;
@@ -32,7 +31,7 @@ public class CustomAuthFailerHandler extends SimpleUrlAuthenticationFailureHandl
       errorMessage = "알 수 없는 이유로 로그인에 실패하였습니다. 관리자에게 문의하세요.";
     }
     errorMessage = URLEncoder.encode(errorMessage, "UTF-8");
-    setDefaultFailureUrl("/auth/login?error=ture&exception="+errorMessage);
+    setDefaultFailureUrl("/auth/login?error=true&exception="+errorMessage+"&errorType="+exception);
     super.onAuthenticationFailure(request,response,exception);
   }
 }

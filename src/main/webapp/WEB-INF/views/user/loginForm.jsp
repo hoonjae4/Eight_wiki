@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../layouts/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<section class="h-100 h-custom">
+<section>
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-10">
@@ -25,7 +25,9 @@
                             <span>
                                 <c:choose>
                                 <c:when test="${not empty error}">
+                                    <p id="valid" class="alert alert-danger">${error}</p>
                                     <p id="valid" class="alert alert-danger">${exception}</p>
+                                    <p id="valid" class="alert alert-danger">${errorType}</p>
                                 </c:when>
                                 </c:choose>
                             </span>
