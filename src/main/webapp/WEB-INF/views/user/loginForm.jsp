@@ -32,6 +32,9 @@
                                 </c:choose>
                             </span>
                             <button id="btn-login" class="btn btn-success">Login</button>
+                            <a href="https://kauth.kakao.com/oauth/authorize?client_id=473d50e8b38292f249d4422411e9ac73&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">
+                                <img height="38px" src="/image/kakao.png" alt="카카오 로그인">
+                            </a>
                         </form>
                     </div>
                 </div>
