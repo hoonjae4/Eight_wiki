@@ -221,6 +221,7 @@ $("#join").on("click",()=>{
             birth: $("#birthYear").val() + "-" + $("#birthMonth").val() + "-" + $("#birthDay").val(),
             gender: $("#gender").val(),
             introduce: $("#introduce").val(),
+            oauth: $("#oauth").val(),
         }
         $.ajax({
             type:"POST",

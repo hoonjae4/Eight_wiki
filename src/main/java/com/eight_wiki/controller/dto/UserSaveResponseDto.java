@@ -39,6 +39,8 @@ public class UserSaveResponseDto {
   @Pattern(regexp = "^((19[0-9]\\d{1})|(20((0[0-9])|(1[0-9])|(2[0-2]))))\\-(([1-9])|(1[0-2]))\\-(([1-9])|([1-2][0-9])|30|31)$" )
   private String birth;
 
+  @Enumerated(EnumType.STRING)
+  private Oauth oauth; //kakao,google
 
   @Enumerated(EnumType.STRING)
   private Gender gender;

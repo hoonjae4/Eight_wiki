@@ -24,7 +24,7 @@ public class UserService {
   public BCryptPasswordEncoder encoder;
   public void 회원가입(UserSaveResponseDto userSaveResponseDto){
     User user = User.builder()
-            .oauth(Oauth.BASIC)
+            .oauth(userSaveResponseDto.getOauth())
             .role(Role.USER)
             .nickName(userSaveResponseDto.getNickName())
             .username(userSaveResponseDto.getUsername())

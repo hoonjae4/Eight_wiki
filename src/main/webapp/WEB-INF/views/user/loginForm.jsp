@@ -14,7 +14,6 @@
                         <!-- FORM -->
                         <form class="px-md-2" action="/auth/loginProc" method="post">
                             <div class="column">
-
                                 <div class="form-outline mb-4">
                                     <input type="text" id="username" name="username" class="form-control" placeholder="Username" />
                                 </div>
@@ -25,10 +24,13 @@
                             <span>
                                 <c:choose>
                                 <c:when test="${not empty error}">
-                                    <p id="valid" class="alert alert-danger">${error}</p>
                                     <p id="valid" class="alert alert-danger">${exception}</p>
-                                    <p id="valid" class="alert alert-danger">${errorType}</p>
                                 </c:when>
+                                </c:choose>
+                                <c:choose>
+                                    <c:when test="${not empty kakaoError}">
+                                        <p id="valid" class="alert alert-danger">${kakaoException}</p>
+                                    </c:when>
                                 </c:choose>
                             </span>
                             <button id="btn-login" class="btn btn-success">Login</button>
